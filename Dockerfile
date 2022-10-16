@@ -2,13 +2,15 @@ FROM node:14.3-alpine as build
 
 ARG VERSION=v0.6.1
 
+LABEL version="${VERSION}"
+
 WORKDIR /app
 
 RUN apk --no-cache add curl git
 
 RUN curl -L https://github.com/etesync/etesync-web/archive/${VERSION}.tar.gz | tar xz --strip 1 
 
-RUN npm install
+RUN yarn
 
 ENV REACT_APP_DEFAULT_API_PATH __REACT_APP_DEFAULT_API_PATH__
 
